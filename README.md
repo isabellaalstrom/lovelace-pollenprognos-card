@@ -37,7 +37,7 @@ views:
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `custom:home-assistant-pollen-card`
-| city | string | **Required** | Lower case city from which you have sensors
+| city | string | **Required** | City from which you have sensors (note: Bräkne-Hoby has to be written as `Bräkne_Hoby`, otherwise it will not work)
 | allergens | list | **Required** | List of allergens for which you have sensors
 | title | boolean | **Optional** | Set to `false` to remove the heading from the card
 | show_state | boolean | **Optional** | Set to `false` if you don't want to show the state text under the images.
