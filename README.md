@@ -1,7 +1,7 @@
 # pollenprognos-card
 A Lovelace custom card for [custom component Pollenprognos](https://github.com/JohNan/homeassistant-pollenprognos) in Home Assistant.
 
-<b>To use this card you have to have `value_as_text` has to be false.</b>
+<b>You need to manually move the folder `pollen_img` directly inside your `www` folder for the images to appear.</b>
 
 ## Installation
 
