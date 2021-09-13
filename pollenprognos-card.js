@@ -31,6 +31,8 @@ class PollenPrognosCard  extends LitElement {
     `
   }
   _text(state){
+    if(state == -1)
+      return "Inga halter";
     if(state == 0)
       return "Inga halter";
     if(state == 1)
