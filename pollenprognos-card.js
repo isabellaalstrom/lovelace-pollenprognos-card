@@ -69,7 +69,7 @@ class PollenPrognosCard  extends LitElement {
         ${this.sensors.map(sensor => html`
         <div class="sensor">
           <p class="box">${sensor.allergen_locale}</p>
-          <img class="box" src="/local/pollen_img/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." ? 0 : sensor.forecast.state}.svg"/>
+          <img class="box" src="/local/pollen_img/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." || sensor.forecast.state == "unavailable" ? 0 : sensor.forecast.state}.svg"/>
           ${this.config.show_state == true || this.config.show_state == null
             ? html`<p class="box">${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." ? sensor.forecast.state : this._text(sensor.forecast.state)}</p>`
             : ""}
@@ -175,8 +175,8 @@ class PollenPrognosCard  extends LitElement {
       
       dict.allergens = allergenReplaced
       dict.forecast = hass.states[`sensor.pollen_${city}_${allergenReplaced}`]
-
       if (dict.forecast.state == "unknown") {
+        if (dict.forecast === undefined) continue;
         var log_text = `A sensor for "${element.allergen_locale}" is returning unknown, you should probably check your config for that sensor in the custom component.`;
         console.log(log_text)
       }
@@ -205,4 +205,3 @@ class PollenPrognosCard  extends LitElement {
 
 class HAPC extends PollenPrognosCard {} ;
 customElements.define('pollenprognos-card', PollenPrognosCard);
-  
