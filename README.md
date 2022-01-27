@@ -7,8 +7,42 @@ A Lovelace custom card for [custom component Pollenprognos](https://github.com/J
 
 For installation instructions [see this guide](https://github.com/thomasloven/hass-config/wiki/Lovelace-Plugins).
 
-## Example configuration
+## Example usage
 Pick the allergens you want to display.
+
+For ui-mode:
+```yaml
+type: 'custom:pollenprognos-card'
+city: Stockholm
+allergens:
+  - Al
+  - Alm
+  - Ambrosia
+  - Björk
+  - Ek
+  - Gråbo
+  - Gräs
+  - Hassel
+  - Sälg / vide   # this one is important you write just like this.
+```
+
+For yaml-mode:
+```yaml
+- type: 'custom:pollenprognos-card'
+  city: Stockholm
+  allergens:
+    - Al
+    - Alm
+    - Ambrosia
+    - Björk
+    - Ek
+    - Gråbo
+    - Gräs
+    - Hassel
+    - Sälg / vide   # this one is important you write just like this.
+```
+
+Usage in a view:
 ```yaml
 title: My awesome Lovelace!
 resources:
@@ -18,7 +52,6 @@ views:
   title: My view
   cards:
     - type: 'custom:pollenprognos-card'
-      title: false
       city: Stockholm
       allergens:
         - Al
