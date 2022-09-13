@@ -69,7 +69,7 @@ class PollenPrognosCard  extends LitElement {
         ${this.sensors.map(sensor => html`
         <div class="sensor">
           <p class="box">${sensor.allergen_locale}</p>
-          <img class="box" src="/local/pollen_img/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "-1" || sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." || sensor.forecast.state == "unavailable" ? 0 : sensor.forecast.state}.svg"/>
+          <img class="box" src="${this.img_path}/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "-1" || sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." || sensor.forecast.state == "unavailable" ? 0 : sensor.forecast.state}.svg"/>
           ${this.config.show_state == true || this.config.show_state == null
             ? html`<p class="box">${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." ? sensor.forecast.state : this._text(sensor.forecast.state)}</p>`
             : ""}
@@ -156,6 +156,12 @@ class PollenPrognosCard  extends LitElement {
     if (this.config.title == null || this.config.title == true) {
       var header_city = this.config.city
       this.header = `Pollenprognos ${header_city.charAt(0).toUpperCase() + header_city.slice(1)}`;
+    }
+
+    if (this.config.img_path != null) {
+      this.img_path = this.config.img_path;
+    } else {
+      this.img_path = "/local/pollen_img";
     }
 
     const cityConf = this.config.city.toLowerCase();
