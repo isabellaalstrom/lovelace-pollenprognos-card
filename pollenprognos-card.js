@@ -69,7 +69,7 @@ class PollenPrognosCard  extends LitElement {
         ${this.sensors.map(sensor => html`
         <div class="sensor">
           <p class="box">${sensor.allergen_locale}</p>
-          <img class="box" src="/local/pollen_img/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." || sensor.forecast.state == "unavailable" ? 0 : sensor.forecast.state}.svg"/>
+          <img class="box" src="/local/pollen_img/${sensor.allergens.toLowerCase()}_${sensor.forecast.state == "-1" || sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." || sensor.forecast.state == "unavailable" ? 0 : sensor.forecast.state}.svg"/>
           ${this.config.show_state == true || this.config.show_state == null
             ? html`<p class="box">${sensor.forecast.state == "unknown" || sensor.forecast.state == "i.u." ? sensor.forecast.state : this._text(sensor.forecast.state)}</p>`
             : ""}
@@ -136,7 +136,7 @@ class PollenPrognosCard  extends LitElement {
     </style>`
   }
 
-  
+
   _tryParseInt(str,defaultValue) {
     var retValue = defaultValue;
     if(str !== null) {
@@ -149,7 +149,7 @@ class PollenPrognosCard  extends LitElement {
     return retValue;
   }
   set hass(hass) {
-    
+
     this._hass = hass;
     var sensors = [];
 
@@ -168,11 +168,11 @@ class PollenPrognosCard  extends LitElement {
       var dict = {};
       dict.allergen_locale = (allergens[i].charAt(0).toUpperCase() + allergens[i].slice(1));
       var allergen = allergens[i].replace(' / ', '_').toLowerCase();
-      
+
       var allergenReplace = allergen.replace('å', 'a')
       var allergenReplace2 = allergenReplace.replace('ä', 'a')
       var allergenReplaced = allergenReplace2.replace('ö', 'o')
-      
+
       dict.allergens = allergenReplaced
       dict.forecast = hass.states[`sensor.pollen_${city}_${allergenReplaced}`]
       if (dict.forecast.state == "unknown") {
